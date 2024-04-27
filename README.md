@@ -25,6 +25,8 @@
 
 [8. Infraestrutura](#c8)
 
+[8. Implicações na arquitetura](#c9)
+
 ## <a name="c1"></a>Descrição:
 
 &nbsp;&nbsp;&nbsp;&nbsp;A problemática central está na falta de dados e base científica relacionados às motivações para adoção/compra e abandono de animais. Nosso instituto parceiro se dedica a compreender essa questão para enfrentar o desafio maior do abandono, buscando reduzir esse índice. O projeto visa preencher essa lacuna no conhecimento científico e social sobre essas relações entre os seres humanos e animais de estimação, fornecendo uma base de dados confiável e abrangente. Para isso, estamos desenvolvendo uma aplicação web intuitiva e amigável, tanto em termos de usabilidade (front-end) quanto na coleta de informações, para os tutores (pesquisados) e também os pesquisadores do INSPA que farão uso dessas informações, proporcionando uma base de dados bem estruturada e de alta qualidade, gerando análises e visualizações dos motivos e comportamentos dos tutores respondentes.
@@ -95,4 +97,16 @@ https://drive.google.com/file/d/1lvrkyBdNkOMikwwuDwzrzmsAu9iIFZi7/view?usp=shari
 
 &nbsp;&nbsp;&nbsp;&nbsp;O projeto utiliza um banco de dados (Postgree) para armazenar informações essenciais, como dados dos usuários, respostas dos formulários e outras informações relacionadas à pesquisa. Os controllers interagem com os modelos para acessar e manipular os dados conforme necessário, garantindo que a lógica de negócios seja aplicada corretamente aos dados armazenados no banco de dados.
 
-A aplicação pode, tamém, depender de APIs externas para funcionalidades específicas, como integração com serviços de autenticação, que será necessária para evitar respostas de bots, que atrapalham a pesquisa. A integração com APIs externas geralmente ocorre nos controladores, onde as requisições HTTP são enviadas para as APIs externas e as respostas são processadas conforme necessário.
+&nbsp;&nbsp;&nbsp;&nbsp;A aplicação pode, tamém, depender de APIs externas para funcionalidades específicas, como integração com serviços de autenticação, que será necessária para evitar respostas de bots, que atrapalham a pesquisa. A integração com APIs externas geralmente ocorre nos controladores, onde as requisições HTTP são enviadas para as APIs externas e as respostas são processadas conforme necessário.
+
+## <a name="c9"></a>Implicações na arquitetura:
+
+&nbsp;&nbsp;&nbsp;&nbsp;A escolha da arquitetura MVC (Model-View-Controller) para o projeto é justificada pelos benefícios que essa abordagem traz em termos de escalabilidade, manutenção, testabilidade e flexibilidade.
+
+&nbsp;&nbsp;&nbsp;&nbsp; Falando de escalabilidade, a arquitetura MVC facilita a divisão de responsabilidades entre os diferentes componentes da aplicação. Isso permite que a aplicação seja escalada de forma eficiente, tanto horizontalmente quanto verticalmente. Os controladores e modelos podem ser distribuídos em servidores diferentes conforme necessário para lidar com um aumento na carga de trabalho, aproveitando a capacidade de escalabilidade horizontal da arquitetura MVC. Além disso, a modularidade da arquitetura permite que cada componente seja otimizado independentemente para lidar com uma maior fluxo de acessos, exigindo mais recuros, contribuindo para a escalabilidade vertical do projeto.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Na manutenção, a arquitetura MVC promove a modularidade do código, o que facilita a manutenção ao longo do ciclo de vida do projeto. As responsabilidades são claramente separadas entre os modelos, visualizações e controladores, permitindo que as alterações em um componente sejam feitas com pouco impacto nos outros componentes. Isso diminui o risco de cometer erros. Também, a reutilização de código fica mais fácil com isso. Componentes como modelos e serviços podem ser compartilhados entre diferentes partes da aplicação, diminuindo a duplicação de código.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Em relçaõa à testabilidade, a arquitetura MVC facilita o teste de integração. Os as camadas da aplicação podem ser testados de forma isolada, o que permite uma cobertura de teste mais abrangente e facilita a identificação e correção de bugs.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Por fim, no quesito flexibilidade, a arquitetura MVC oferece a capacidade de adaptar a aplicação a novos requisitos e mudanças no ambiente operacional. Novas funcionalidades podem ser adicionadas facilmente, e os componentes existentes podem ser modificados ou substituídos caso necessário.
