@@ -21,7 +21,9 @@
 
 [6. Models](#c6)
 
-[7. Infraestrutura](#c7)
+[7. Services](#c7)
+
+[8. Infraestrutura](#c8)
 
 ## <a name="c1"></a>Descrição:
 
@@ -74,8 +76,23 @@ https://drive.google.com/file/d/1lvrkyBdNkOMikwwuDwzrzmsAu9iIFZi7/view?usp=shari
 &nbsp;&nbsp;&nbsp;&nbsp;Os models representam a camada de acesso aos dados e a lógica de negócios subjacente à aplicação. Em uma aplicação típica baseada em MVC (Model-View-Controller), os modelos são responsáveis por gerenciar os dados da aplicação e as regras de negócios associadas a esses dados.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Os modelos geralmente encapsulam as operações CRUD (Create, Read, Update, Delete) para interagir com o banco de dados ou outras fontes de armazenamento de dados. Eles são responsáveis por consultar, atualizar e manipular os dados conforme necessário para atender aos requisitos da aplicação. Além disso, os modelos podem conter validações de dados, lógica de negócios complexa e outras funcionalidades relacionadas ao processamento e manipulação dos dados.
-Na arquitetura produzida acima, foram feitos 6 models, um para cada controller, basicamente. O primeiro deles, é chamado Users e está relacionado ao controller Users, ele têm os atributos ID, Name, Password e Role, que fazem parte do cadastro/login do usuário na aplicação, acessando assim o banco de dados quando um desses dois “eventos” acontecem e permitindo que a aplicação funcione.
 
-## <a name="c7"></a>Infraestrutura:
+&nbsp;&nbsp;&nbsp;&nbsp;Na arquitetura produzida acima, foram feitos 6 models, um para cada controller, basicamente. O primeiro deles, é chamado Users e está relacionado ao controller Users, ele têm os atributos ID, Name, Password e Role, que fazem parte do cadastro/login do usuário na aplicação, acessando assim o banco de dados quando um desses dois “eventos” acontecem e permitindo que a aplicação funcione.
 
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;Após isso, temos os models para acesso aos dados dos formulários, eles mostram informações (atributos) como ID, Nome, idade, entre outros que não estão sendo mostrados na arquitetura por serem muitos itens. Eles se conectam tanto à base de dados mas também se conectam aos services, e por isso não tem nenhuma seta do lado esquerdo, mas isso será explicado no tópico 8. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;Ao final da lista, temos o controller Researcher, que, como o nome diz, serve para o pesquisador poder ter acesso, em sua página de administrador do sistema, às tabelas que contêm os dados da pesquisa
+
+## <a name="c7"></a>Services:
+
+&nbsp;&nbsp;&nbsp;&nbsp;Os services são responsáveis por encapsular a lógica de negócios e fornecer funcionalidades específicas para outras partes da aplicação, como controladores, modelos e outras classes ou componentes.
+
+&nbsp;&nbsp;&nbsp;&nbsp;A camada de serviços é comumente usada para separar a lógica de negócios da lógica de apresentação ou acesso a dados. Isso promove uma melhor modularidade e reutilização de código, além de facilitar os testes automatizados, já que a lógica de negócios pode ser isolada em serviços que podem ser testados independentemente de outras partes do sistema.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Neste caso, ela está sendo usada para que o usuário veja os resultados por meio dela, então ela se conecta as camadas models de formulário que têm acesso à base de dados (Forms Past, Forms Present, Forms Future, Forms Null) e também ao controller “Research” para poder mostrar essas informações na tela da página. Dessa forma, ele atua quase que como um “mediador”.
+
+## <a name="c8"></a>Infraestrutura:
+
+&nbsp;&nbsp;&nbsp;&nbsp;O projeto utiliza um banco de dados (Postgree) para armazenar informações essenciais, como dados dos usuários, respostas dos formulários e outras informações relacionadas à pesquisa. Os controllers interagem com os modelos para acessar e manipular os dados conforme necessário, garantindo que a lógica de negócios seja aplicada corretamente aos dados armazenados no banco de dados.
+
+A aplicação pode, tamém, depender de APIs externas para funcionalidades específicas, como integração com serviços de autenticação, que será necessária para evitar respostas de bots, que atrapalham a pesquisa. A integração com APIs externas geralmente ocorre nos controladores, onde as requisições HTTP são enviadas para as APIs externas e as respostas são processadas conforme necessário.
